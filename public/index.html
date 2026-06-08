@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calla's Coffee | Premium Quality</title>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'coffee-dark': '#3e2723',
+                        'coffee-medium': '#5d4037',
+                        'coffee-light': '#8d6e63',
+                        'warm-beige': '#f5f0e6',
+                        'creamy-white': '#fcfbf9',
+                        'accent': '#d4a373',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                        mono: ['Courier New', 'Courier', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f5f0e6; scroll-behavior: smooth; }
+        .glass-panel {
+            background: rgba(252, 251, 249, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 40px -10px rgba(62, 39, 35, 0.1);
+        }
+        .menu-card { transition: all 0.4s ease; }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(62, 39, 35, 0.2);
+        }
+        .menu-img { transition: transform 0.5s ease; }
+        .menu-card:hover .menu-img { transform: scale(1.05); }
+        
+        .swiper { width: 100%; height: 500px; border-radius: 2rem; overflow: hidden; }
+        .swiper-slide { text-align: center; font-size: 18px; background: #fff; display: flex; justify-content: center; align-items: center; position: relative;}
+        .swiper-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .swiper-slide .overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(62,39,35,0.8) 0%, rgba(62,39,35,0.2) 100%); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 4rem; text-align: left; color: #fcfbf9; }
+        
+        /* Receipt Paper Style */
+        .receipt-paper {
+            background: #fff;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .receipt-paper::after {
+            content: "";
+            position: absolute;
+            bottom: -10px; left: 0; right: 0;
+            height: 10px;
+            background-size: 20px 20px;
+            background-image: radial-gradient(circle at 10px 10px, transparent 10px, #fff 11px);
+        }
+    </style>
+</head>
+<body class="font-sans text-coffee-dark antialiased selection:bg-accent selection:text-white pb-20 relative">
+
+    <!-- Header Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-white/50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-serif text-2xl font-bold text-coffee-dark tracking-wide">Calla's <span class="text-accent italic">Coffee</span></h1>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#katalog" class="hover:text-accent transition-colors">Menu</a>
+                <a href="#track-order" class="hover:text-accent transition-colors">Cek Nota Pesanan</a>
+                <a href="/admin-login.html" class="hover:text-accent transition-colors">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Slider -->
+    <section class="pt-28 px-6 max-w-7xl mx-auto mb-16">
+        <div class="swiper mySwiper shadow-2xl shadow-coffee-dark/20">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="/images/promo1.png" alt="Promo 1">
+                    <div class="overlay">
+                        <span class="text-accent font-semibold tracking-wider mb-2 uppercase text-sm">Spesial Hari Ini</span>
+                        <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4 leading-tight">Kehangatan dalam <br>Setiap Tegukan</h2>
+                        <p class="font-light text-lg max-w-md opacity-90">Nikmati racikan espresso house blend kami yang khas. Sempurna untuk mengawali harimu.</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="/images/promo2.png" alt="Promo 2">
+                    <div class="overlay">
+                        <span class="text-accent font-semibold tracking-wider mb-2 uppercase text-sm">Diskon Akhir Pekan</span>
+                        <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4 leading-tight">Beli 2 Latte, <br>Nikmati Lebih Lama</h2>
+                        <p class="font-light text-lg max-w-md opacity-90">Rayakan momen santai di akhir pekan dengan sahabat ditemani koleksi milk based coffee terbaik.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- Main Application Container -->
+    <main id="katalog" class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10">
+        
+        <!-- Katalog Menu Section -->
+        <div class="lg:col-span-2 space-y-8">
+            <div class="flex items-center justify-between border-b border-coffee-light/20 pb-4">
+                <h3 class="font-serif text-3xl font-semibold">Katalog Menu</h3>
+            </div>
+            <!-- Render Menu JS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="menu-container"></div>
+        </div>
+
+        <!-- Checkout / Cart Section -->
+        <div class="lg:col-span-1">
+            <div class="glass-panel rounded-3xl p-8 sticky top-28">
+                <h3 class="font-serif text-2xl font-semibold mb-6">Keranjang Anda</h3>
+                
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-coffee-medium mb-2">Nama Pemesan</label>
+                        <input type="text" id="customer-name" placeholder="Tulis nama Anda..." class="w-full bg-creamy-white border border-coffee-light/30 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all">
+                    </div>
+                </div>
+
+                <div id="cart-items" class="space-y-4 mb-6 max-h-[300px] overflow-y-auto pr-2">
+                    <p class="text-sm text-coffee-medium italic text-center py-4">Belum ada menu yang dipilih.</p>
+                </div>
+
+                <div class="border-t border-coffee-light/20 pt-4 mb-8">
+                    <div class="flex justify-between items-center text-lg font-semibold">
+                        <span>Total</span>
+                        <span id="cart-total" class="text-accent">Rp 0</span>
+                    </div>
+                </div>
+
+                <button onclick="openPaymentModal()" class="w-full bg-coffee-dark text-creamy-white hover:bg-coffee-medium transition-colors font-medium py-4 rounded-xl shadow-lg shadow-coffee-dark/20 text-lg">
+                    Lanjut Pembayaran
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Track Order Section (Nota System) -->
+    <section id="track-order" class="max-w-3xl mx-auto px-6 mt-32 mb-20">
+        <div class="glass-panel rounded-3xl p-10 text-center">
+            <h3 class="font-serif text-3xl font-semibold mb-4">Cari Nota Pesanan</h3>
+            <p class="text-coffee-medium mb-6">Masukkan ID Nota (contoh: INV-2026...) untuk melihat rincian dan status pesanan.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+                <input type="text" id="track-input" placeholder="ID Nota (misal: INV-2026...)" class="bg-creamy-white border border-coffee-light/30 rounded-xl px-6 py-3 w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-accent/50 text-center">
+                <button onclick="searchNota()" class="bg-accent text-white px-8 py-3 rounded-xl font-medium hover:bg-accent/90 transition-colors shadow-lg shadow-accent/20">Cari Nota</button>
+            </div>
+            
+            <!-- Receipt Display -->
+            <div id="receipt-display" class="hidden flex justify-center">
+                <div class="receipt-paper w-full max-w-sm p-8 text-left text-sm font-mono text-gray-800">
+                    <div class="text-center mb-6 border-b-2 border-dashed border-gray-300 pb-4">
+                        <h2 class="text-xl font-bold font-serif mb-1">Calla's Coffee</h2>
+                        <p class="text-xs text-gray-500">Premium Taste, Organic Vibe</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <p><strong>No. Nota:</strong> <span id="r-nota"></span></p>
+                        <p><strong>Tgl:</strong> <span id="r-date"></span></p>
+                        <p><strong>Nama:</strong> <span id="r-name"></span></p>
+                        <p><strong>Metode:</strong> <span id="r-method"></span></p>
+                    </div>
+
+                    <div class="border-t border-b border-dashed border-gray-300 py-4 mb-4" id="r-items">
+                        <!-- Items appended here -->
+                    </div>
+
+                    <div class="flex justify-between items-center font-bold text-base mb-6">
+                        <span>TOTAL</span>
+                        <span id="r-total"></span>
+                    </div>
+
+                    <div class="text-center bg-gray-100 p-3 rounded-lg border border-gray-200">
+                        <p class="text-xs mb-1">Status Pesanan Saat Ini:</p>
+                        <p id="r-status" class="font-bold text-lg uppercase tracking-widest"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-coffee-dark/60 backdrop-blur-sm" onclick="closePaymentModal()"></div>
+        <div class="bg-creamy-white w-full max-w-md p-8 rounded-3xl shadow-2xl relative z-10 transform scale-95 opacity-0 transition-all duration-300" id="payment-modal-content">
+            <h3 class="font-serif text-2xl font-bold mb-2">Pilih Metode Pembayaran</h3>
+            <p class="text-coffee-medium text-sm mb-6">Selesaikan pesanan Anda dengan aman.</p>
+            
+            <div class="space-y-3 mb-8">
+                <label class="flex items-center justify-between p-4 border border-coffee-light/30 rounded-xl cursor-pointer hover:bg-warm-beige transition-colors">
+                    <div class="flex items-center gap-3">
+                        <input type="radio" name="payment_method" value="QRIS" checked class="w-5 h-5 text-accent focus:ring-accent">
+                        <span class="font-medium">QRIS</span>
+                    </div>
+                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Instan</span>
+                </label>
+                <label class="flex items-center justify-between p-4 border border-coffee-light/30 rounded-xl cursor-pointer hover:bg-warm-beige transition-colors">
+                    <div class="flex items-center gap-3">
+                        <input type="radio" name="payment_method" value="BRImo" class="w-5 h-5 text-accent focus:ring-accent">
+                        <span class="font-medium">BRImo</span>
+                    </div>
+                </label>
+                <label class="flex items-center justify-between p-4 border border-coffee-light/30 rounded-xl cursor-pointer hover:bg-warm-beige transition-colors">
+                    <div class="flex items-center gap-3">
+                        <input type="radio" name="payment_method" value="ShopeePay" class="w-5 h-5 text-accent focus:ring-accent">
+                        <span class="font-medium">ShopeePay</span>
+                    </div>
+                </label>
+                <label class="flex items-center justify-between p-4 border border-coffee-light/30 rounded-xl cursor-pointer hover:bg-warm-beige transition-colors">
+                    <div class="flex items-center gap-3">
+                        <input type="radio" name="payment_method" value="DANA" class="w-5 h-5 text-accent focus:ring-accent">
+                        <span class="font-medium">DANA</span>
+                    </div>
+                </label>
+                <label class="flex items-center justify-between p-4 border border-coffee-light/30 rounded-xl cursor-pointer hover:bg-warm-beige transition-colors">
+                    <div class="flex items-center gap-3">
+                        <input type="radio" name="payment_method" value="GoPay" class="w-5 h-5 text-accent focus:ring-accent">
+                        <span class="font-medium">GoPay</span>
+                    </div>
+                </label>
+            </div>
+
+            <div class="flex gap-4">
+                <button onclick="closePaymentModal()" class="flex-1 px-4 py-3 border border-coffee-light/30 rounded-xl font-medium text-coffee-medium hover:bg-warm-beige transition-colors">Batal</button>
+                <button onclick="submitOrder()" class="flex-1 px-4 py-3 bg-accent text-white rounded-xl font-medium shadow-lg shadow-accent/20 hover:bg-accent/90 transition-colors">Bayar Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-[200] flex flex-col items-center gap-3 w-full max-w-sm pointer-events-none"></div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Custom Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            // Define colors based on type
+            let bgColor = 'bg-coffee-dark';
+            let icon = '';
+            if (type === 'error') {
+                bgColor = 'bg-red-500';
+                icon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+            } else if (type === 'success') {
+                bgColor = 'bg-green-600';
+                icon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+            } else if (type === 'warning') {
+                bgColor = 'bg-orange-500';
+                icon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
+            }
+
+            toast.className = `flex items-center gap-3 px-4 py-3 rounded-xl shadow-2xl text-white text-sm font-medium transform transition-all duration-300 opacity-0 -translate-y-4 ${bgColor} pointer-events-auto`;
+            toast.innerHTML = `${icon} <span>${message}</span>`;
+            
+            container.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', '-translate-y-4');
+                toast.classList.add('opacity-100', 'translate-y-0');
+            }, 10);
+            
+            // Remove after 3.5s
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', '-translate-y-4');
+                setTimeout(() => { toast.remove(); }, 300);
+            }, 3500);
+        }
+
+        // Initialize Swiper
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+        });
+
+        let menus = [];
+        let cart = {};
+
+        function formatRupiah(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
+        }
+
+        async function fetchMenus() {
+            try {
+                const response = await fetch('/api/menus');
+                menus = await response.json();
+                renderMenus();
+            } catch (error) {
+                console.error("Gagal memuat menu:", error);
+            }
+        }
+
+        function renderMenus() {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = menus.map(menu => `
+                <div class="glass-panel rounded-3xl overflow-hidden menu-card flex flex-col h-full bg-creamy-white">
+                    <div class="h-48 overflow-hidden bg-warm-beige">
+                        <img src="${menu.image || '/images/black_coffee.png'}" alt="${menu.name}" class="w-full h-full object-cover menu-img">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-serif text-xl font-bold text-coffee-dark">${menu.name}</h4>
+                            <span class="text-accent font-bold">${formatRupiah(menu.price)}</span>
+                        </div>
+                        <p class="text-sm text-coffee-medium mb-6 font-light flex-1">${menu.description}</p>
+                        
+                        <div class="flex items-center justify-between bg-warm-beige rounded-xl p-1 border border-coffee-light/10 mt-auto">
+                            <button onclick="updateCart(${menu.id}, -1)" class="w-10 h-10 rounded-lg flex items-center justify-center text-coffee-medium hover:bg-creamy-white transition-colors">-</button>
+                            <span class="font-bold w-8 text-center text-coffee-dark" id="qty-${menu.id}">${cart[menu.id] || 0}</span>
+                            <button onclick="updateCart(${menu.id}, 1)" class="w-10 h-10 rounded-lg flex items-center justify-center bg-accent text-white hover:bg-accent/90 transition-colors shadow-md shadow-accent/20">+</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateCart(menuId, change) {
+            cart[menuId] = (cart[menuId] || 0) + change;
+            if (cart[menuId] < 0) cart[menuId] = 0;
+            document.getElementById(`qty-${menuId}`).innerText = cart[menuId];
+            renderCart();
+        }
+
+        function renderCart() {
+            const cartContainer = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            let html = '';
+            let total = 0;
+
+            menus.forEach(menu => {
+                if (cart[menu.id] > 0) {
+                    const subtotal = cart[menu.id] * menu.price;
+                    total += subtotal;
+                    html += `
+                        <div class="flex justify-between items-center text-sm mb-3">
+                            <div class="flex-1">
+                                <p class="font-medium text-coffee-dark">${menu.name}</p>
+                                <p class="text-coffee-medium text-xs">${cart[menu.id]}x @ ${formatRupiah(menu.price)}</p>
+                            </div>
+                            <span class="font-semibold text-coffee-dark">${formatRupiah(subtotal)}</span>
+                        </div>
+                    `;
+                }
+            });
+
+            cartContainer.innerHTML = total === 0 ? '<p class="text-sm text-coffee-medium italic text-center py-4">Belum ada menu yang dipilih.</p>' : html;
+            cartTotal.innerText = formatRupiah(total);
+        }
+
+        // Modal Logic
+        function openPaymentModal() {
+            const name = document.getElementById('customer-name').value;
+            if (!name) return showToast("Mohon masukkan nama Anda terlebih dahulu.", "warning");
+            if (Object.values(cart).reduce((a, b) => a + b, 0) === 0) return showToast("Keranjang masih kosong!", "warning");
+            
+            const modal = document.getElementById('payment-modal');
+            const content = document.getElementById('payment-modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closePaymentModal() {
+            const modal = document.getElementById('payment-modal');
+            const content = document.getElementById('payment-modal-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        async function submitOrder() {
+            const name = document.getElementById('customer-name').value;
+            const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+            
+            const items = [];
+            for (const [menuId, quantity] of Object.entries(cart)) {
+                if (quantity > 0) items.push({ menu_id: parseInt(menuId), quantity: quantity });
+            }
+
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({ customer_name: name, payment_method: paymentMethod, items: items })
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    closePaymentModal();
+                    showToast(`Pesanan Berhasil! ID Nota: ${result.receipt_number}`, "success");
+                    
+                    // Reset
+                    cart = {}; 
+                    document.getElementById('customer-name').value = '';
+                    renderMenus(); 
+                    renderCart();
+                    
+                    // Auto fill track
+                    document.getElementById('track-input').value = result.receipt_number;
+                    window.location.hash = "#track-order";
+                    setTimeout(searchNota, 500);
+                } else {
+                    showToast(result.message || "Terjadi kesalahan saat memproses pesanan.", "error");
+                }
+            } catch (error) {
+                console.error("Checkout error:", error);
+                showToast("Gagal terhubung ke server.", "error");
+            }
+        }
+
+        async function searchNota() {
+            const input = document.getElementById('track-input').value;
+            if (!input) return showToast('Masukkan ID Nota!', 'warning');
+
+            try {
+                const response = await fetch(`/api/orders/${input}`);
+                const result = await response.json();
+                const receiptDisplay = document.getElementById('receipt-display');
+                
+                if (response.ok) {
+                    receiptDisplay.classList.remove('hidden');
+                    
+                    // Fill Receipt Data
+                    document.getElementById('r-nota').innerText = result.receipt_number;
+                    const date = new Date(result.created_at);
+                    document.getElementById('r-date').innerText = date.toLocaleDateString('id-ID') + ' ' + date.toLocaleTimeString('id-ID');
+                    document.getElementById('r-name').innerText = result.customer_name;
+                    document.getElementById('r-method').innerText = result.payment_method;
+                    
+                    // Items
+                    let itemsHtml = '';
+                    result.items.forEach(item => {
+                        const menuName = item.menu ? item.menu.name : 'Menu Dihapus';
+                        itemsHtml += `
+                            <div class="flex justify-between mb-1">
+                                <span>${menuName} <span class="text-xs text-gray-500">x${item.quantity}</span></span>
+                                <span>${formatRupiah(item.price * item.quantity)}</span>
+                            </div>
+                        `;
+                    });
+                    document.getElementById('r-items').innerHTML = itemsHtml;
+                    
+                    // Total & Status
+                    document.getElementById('r-total').innerText = formatRupiah(result.total_price);
+                    
+                    const statusEl = document.getElementById('r-status');
+                    if(result.status === 'completed') {
+                        statusEl.innerText = "SELESAI";
+                        statusEl.className = "font-bold text-lg uppercase tracking-widest text-green-600";
+                    } else if(result.status === 'process') {
+                        statusEl.innerText = "DIPROSES";
+                        statusEl.className = "font-bold text-lg uppercase tracking-widest text-blue-600";
+                    } else {
+                        statusEl.innerText = "MENUNGGU";
+                        statusEl.className = "font-bold text-lg uppercase tracking-widest text-orange-500";
+                    }
+
+                } else {
+                    showToast(result.message || 'Nota tidak ditemukan', 'error');
+                    receiptDisplay.classList.add('hidden');
+                }
+            } catch (e) {
+                showToast('Gagal mengecek nota pesanan', 'error');
+            }
+        }
+
+        // Initialize fetch
+        fetchMenus();
+    </script>
+</body>
+</html>
